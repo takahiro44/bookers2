@@ -6,6 +6,13 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
 
   has_one_attached :profile_image
+
+    # name: 一意性 + 2〜20文字
+    validates :name, presence: true, uniqueness: true, length: { in: 2..20 }
+
+    # introduction: 最大50文字
+    validates :introduction, length: { maximum: 50 }
+
   
   def get_profile_image(width,height)
     unless profile_image.attached?

@@ -29,6 +29,15 @@
                 <% end %>  
               </td>
               <td><%= book.body %></td>
+              <td>
+                <% if book.favorited_by?(current_user) %>
+                  <%= link_to book_favorite_path(book.id),method: :delete, class:"like_link fa-solid fa-heart text-danger" do %><%= book.favorites.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to book_favorite_path(book.id),method: :post, class:"like_link fa-solid fa-heart" do %><%= book.favorites.count %>
+                  <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

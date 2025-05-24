@@ -18,6 +18,15 @@
           </td>
           <td><%= link_to @book.title, book_path(@book.id) %></td>
           <td><%= @book.body %></td>
+          <td>
+            <% if @book.favorited_by?(current_user) %>
+              <%= link_to book_favorite_path(@book),method: :delete, class:"like_link fa-solid fa-heart text-danger" do %><%= @book.favorites.count %>
+              <% end %>
+            <% else %>
+              <%= link_to book_favorite_path(@book),method: :post, class:"like_link fa-solid fa-heart" do %><%= @book.favorites.count %>
+              <% end %>
+            <% end %>
+          </td>
           <% if @book.user == current_user %>
           <td>
             <%= link_to "Edit", edit_book_path(@book.id),class:"btn btn-sm btn-success" %>
